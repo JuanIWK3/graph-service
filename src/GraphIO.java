@@ -41,14 +41,8 @@ public class GraphIO {
         return graph;
     }
 
-    public static void readGraphsInDirectory(String directory) {
+    public static File[] getGraphsFromDirectory(String directory) {
         File dir = new File(directory);
-        File[] directoryListing = dir.listFiles();
-        System.out.println("Graphs in directory:");
-        if (directoryListing != null) {
-            for (int i = 0; i < directoryListing.length; i++) {
-                System.out.println((i + 1) + ". " + directoryListing[i].getName());
-            }
-        }
+        return dir.listFiles();
     }
 }

@@ -116,36 +116,29 @@ public class Menu {
     void loadGraph() {
         System.out.println("Select a graph to load:");
 
-        GraphIO.readGraphsInDirectory("graphs");
+        File[] graphs = GraphIO.getGraphsFromDirectory("graphs");
 
-        System.out.print("Enter your choice: ");
+        for (int i = 0; i < graphs.length; i++) {
+            System.out.println((i + 1) + ". " + graphs[i].getName());
+        }
+
+        System.out.print("\nEnter your choice: ");
 
         Scanner scanner = new Scanner(System.in);
 
         int choice = scanner.nextInt();
 
-        String[] filenames = new String[0];
-
-
-        File dir = new File("graphs");
-
-        File[] directoryListing = dir.listFiles();
-
-        if (directoryListing != null) {
-            filenames = new String[directoryListing.length];
-            for (int i = 0; i < directoryListing.length; i++) {
-                filenames[i] = directoryListing[i].getName();
-            }
+        if (choice < 1 || choice > graphs.length) {
+            System.out.println("Invalid choice");
+            loadGraph();
+            return;
         }
 
-        String filename = filenames[choice - 1];
+        loadedGraphFilename = graphs[choice - 1].getName();
 
-        Graph graph = GraphIO.loadGraph("graphs/" + filename);
+        loadedGraph = GraphIO.loadGraph("graphs/" + loadedGraphFilename);
 
-        loadedGraphFilename = "graphs/" + filename;
-        loadedGraph = graph;
-
-        System.out.println("Graph loaded");
+        System.out.println("Graph loaded from graphs/" + loadedGraphFilename);
 
         continueQuestion();
 
