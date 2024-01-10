@@ -5,9 +5,9 @@ import java.util.Map;
 public class GraphIO {
     public static void saveGraph(Graph graph, String filename) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
-            for (Map.Entry<Integer, List<Graph.Edge>> entry : graph.getAdjList().entrySet()) {
+            for (Map.Entry<Integer, List<Edge>> entry : graph.getAdjList().entrySet()) {
                 writer.print(entry.getKey() + ":");
-                for (Graph.Edge edge : entry.getValue()) {
+                for (Edge edge : entry.getValue()) {
                     writer.print("(" + edge.destination + "," + edge.weight + ") ");
                 }
                 writer.println();
